@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+    <style>
+        img {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <img src="http://img.zcool.cn/community/01f5a959608523a8012193a3679755.gif" alt="" loding="http://pic15.nipic.com/20110628/7398485_105718357143_2.jpg">
+    <script>
+        function lod() {
+            $('img').each(function() {
+                console.log(123)
+                var _this = this
+                if ($(_this).attr('islod') == true) return;
+                if ($(window).height() + $(window).scrollTop() >= $(this).offset().top) {
+
+                    setTimeout(function() {
+                        $(_this).attr('src', $(_this).attr('loding'))
+                        $(_this).attr('islod', 'true')
+                    }, 500);
+                }
+            })
+        }
+        lod()
+        $(window).scroll(function() {
+            lod()
+        })
+    </script>
+</body>
+
+</html>

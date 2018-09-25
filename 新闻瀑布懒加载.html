@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="E:\作业31\index.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+</head>
+
+<body>
+
+    <div class="waterfall">
+        <ul class="clearfix">
+
+            <!--<li>
+                <a href="#"><img src="http://s.img.mix.sina.com.cn/auto/resize?img=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F5_img%2F2016_09%2F453_75615_657883.jpg&size=250_0" alt=""></a>
+                <h3>6546654</h3>
+                <p>857456546464</p>
+            </li>  -->
+            <div class="loding">123</div>
+        </ul>
+
+    </div>
+    <script>
+        var line = $('.waterfall').width() / 300
+        var lineArr = []
+        for (var i = 0; i < line; i++) {
+            lineArr[i] = 0
+        }
+        var isloding = true
+        var index = 1
+
+        function getData() {
+            $.ajax({
+                url: 'http://platform.sina.com.cn/slide/album_tech',
+                type: 'GET',
+                jsonp: "jsoncallback",
+                data: {
+                    app_key: '1271687855',
+                    num: 10,
+                    page: index
+                },
+                dataType: 'jsonp'
+            }).done(function(e) {
+                console.log(e)
+
+                render(e)
+                index++
+                isloding = false
+
+            })
+        }
+
+        getData()
+
+        function render(data1) {
+
+
+            data1.data.forEach(function(news) {
+
+                var $con = $('<li class="newing"><a href="' + news.url + '"><img src="' + news.img_url + '" alt=""></a><h3>' + news.short_name + '</h3><p>' + news.name + '</p></li >')
+                    // $('.waterfall ul').append($con)0
+
+                $con.appendTo('.waterfall ul')
+
+
+            })
+            $('.waterfall .newing img').on('load', function() {
+
+                var minVal = lineArr[0]
+                var minIndex = 0
+                for (var i = 0; i < line; i++) {
+                    if (lineArr[i] < minVal) {
+                        minVal = lineArr[i]
+                        minIndex = i
+                    }
+                }
+                $(this).parents('li').css({
+                    top: minVal,
+                    left: minIndex * 300
+                }).removeClass('newing')
+                lineArr[minIndex] += $(this).parents('li').outerHeight(true) + 20
+
+
+            })
+        }
+        $(window).on('scroll', function() {
+
+            if (isloding == true) return;
+            if ($(document).height() <= $(window).height() + window.scrollY) {
+                isloding = true
+                setTimeout(function() {
+                    getData()
+                }, 700)
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>
